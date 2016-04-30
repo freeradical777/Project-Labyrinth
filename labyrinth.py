@@ -2,7 +2,7 @@ import gridMaker
 from gridMaker import *
 import random
 
-grid = gridMaker.randomGrid(10, 5)
+grid = gridMaker.randomGrid(4, 3)
 
 
 class Maze(object):
@@ -49,9 +49,9 @@ class Maze(object):
         elif key == 'a': d = left
         elif key == 's': d = down
         elif key == 'd': d = right
-        else: raise(ValueError, "Not a direction!")
+        else: raise ValueError("Not a direction!")
         if start[d] == True: #If there's a wall
-            raise(ValueError, "There's a wall there!")
+            raise ValueError("There's a wall there!")
         else:
             self.player_pos = go(self.player_pos, d)
 
@@ -93,11 +93,11 @@ class Maze(object):
         return rep
 
 m=Maze(grid)
-while m.player_pos != m.minotaur_pos:
+while not m.won() and not m.lost():
     print m
     try:
         m.move_player(raw_input("Direction: "))
-    except ValueError, e:
+    except ValueError as e:
         print e
         continue
     m.move_minotaur()
