@@ -43,8 +43,13 @@ class Maze(object):
                 if path_found == True:
                     break
 
-    def move_player(self, d):
+    def move_player(self, key):
         start = self.grid[self.player_pos]
+        if key == 'w': d = up
+        elif key == 'a': d = left
+        elif key == 's': d = down
+        elif key == 'd': d = right
+        else: raise(ValueError, "Not a direction!")
         if start[d] == True: #If there's a wall
             raise(ValueError, "There's a wall there!")
         else:
@@ -91,11 +96,8 @@ m=Maze(grid)
 while m.player_pos != m.minotaur_pos:
     print m
     try:
-        m.move_player(int(raw_input("Direction: ")))
-    except ValueError:
-        print "Wall!"
-        continue
-    except IndexError:
-        print "Not a direction"
+        m.move_player(raw_input("Direction: "))
+    except ValueError, e:
+        print e
         continue
     m.move_minotaur()
