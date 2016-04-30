@@ -85,7 +85,7 @@ class Maze(object):
                     rep += '+  +'
             rep += '\n'
         return rep
-
+print asciiGrid(grid, 10, 5)
 m=Maze(grid)
 while m.player_pos != m.minotaur_pos:
     m.move_player(int(raw_input("Direction: ")))
