@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import random
 
 up = 0
@@ -41,16 +44,29 @@ def newFullGrid(n,m):
 
 def asciiGrid(g,n,m):
     c = ""
-    for i in xrange(m):
-        for j in xrange(n):
-            if g[(i,j)][down]:
-                c += '_'
+    for j in xrange(m):
+        for i in xrange(n):
+            if g[(i,j)][up]:
+                c += '.#.'
+            else:
+                c += '. .'
+        c += '\n'
+        for i in xrange(n):
+            if g[(i,j)][left]:
+                c += '#'
             else:
                 c += ' '
+            c += ' '
             if g[(i,j)][right]:
-                c += '|'
+                c += '#'
             else:
                 c += ' '
+        c += '\n'
+        for i in xrange(n):
+            if g[(i,j)][up]:
+                c += '.#.'
+            else:
+                c += '. .'
         c += '\n'
     return c
 
@@ -61,7 +77,6 @@ def randomGrid(n,m):
     visited = c[:]
     while c:
         node = pickNode(c)
-        print asciiGrid(g,n,m,node)
         neighbors = []
         for d in dirs:
             neighbor = go(node,d)
@@ -79,3 +94,6 @@ def randomGrid(n,m):
 
 pickNode = random.choice
 pickNeighbor = random.choice
+
+
+print asciiGrid(randomGrid(4,3),4,3)
