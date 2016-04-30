@@ -13,6 +13,8 @@ class Maze(object):
         for (i,j) in grid.keys():
             if i>self.n: self.n = i
             if j>self.m: self.m = j
+        self.n += 1
+        self.m += 1
         self.player_pos = (random.randrange(self.n), random.randrange(self.m))
         self.minotaur_pos = (random.randrange(self.n), random.randrange(self.m))
         self.star_pos = ((random.randrange(self.n), random.randrange(self.m)))
@@ -44,8 +46,7 @@ class Maze(object):
     def move_player(self, d):
         start = self.grid[self.player_pos]
         if start[d] == True: #If there's a wall
-            print "There's a wall there!"
-            self.move_player(int(raw_input("Direction: ")))
+            raise(ValueError, "There's a wall there!")
         else:
             self.player_pos = go(self.player_pos, d)
 
@@ -88,7 +89,13 @@ class Maze(object):
 print asciiGrid(grid, 10, 5)
 m=Maze(grid)
 while m.player_pos != m.minotaur_pos:
-    m.move_player(int(raw_input("Direction: ")))
-    m.move_minotaur()
     print m
-
+    try:
+        m.move_player(int(raw_input("Direction: ")))
+    except ValueError:
+        print "Wall!"
+        continue
+    except IndexError:
+        print "Not a direction"
+        continue
+    m.move_minotaur()
