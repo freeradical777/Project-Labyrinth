@@ -11,3 +11,6 @@ def newFullGrid(n,m):
         for j in xrange(m):
             d[(i,j)] = [True,True,True,True]
     return d
+
+def randomGrid(n,m):
+    return newFullGrid(n,m)
