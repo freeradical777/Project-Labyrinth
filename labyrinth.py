@@ -2,7 +2,7 @@ import gridMaker
 from gridMaker import *
 import random
 
-grid = gridMaker.randomGrid(4, 3)
+grid = gridMaker.randomGrid(25, 7)
 
 
 class Maze(object):
