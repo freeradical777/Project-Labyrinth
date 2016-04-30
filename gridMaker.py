@@ -53,12 +53,12 @@ def asciiGrid(g,n,m):
         c += '\n'
         for i in xrange(n):
             if g[(i,j)][left]:
-                c += '-'
+                c += '—'
             else:
                 c += '.'
             c += '@'
             if g[(i,j)][right]:
-                c += '-'
+                c += '—'
             else:
                 c += '.'
         c += '\n'
