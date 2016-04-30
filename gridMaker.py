@@ -53,12 +53,12 @@ def asciiGrid(g,n,m):
         c += '\n'
         for i in xrange(n):
             if g[(i,j)][left]:
-                c += '—'
+                c += '-'
             else:
                 c += '.'
-            c += '@'
+            c += '+'
             if g[(i,j)][right]:
-                c += '—'
+                c += '-'
             else:
                 c += '.'
         c += '\n'
@@ -76,6 +76,7 @@ def randomGrid(n,m):
     c = [random.choice(g.keys())]
     visited = c[:]
     while c:
+        #print asciiGrid(g,n,m)
         node = pickNode(c)
         neighbors = []
         for d in dirs:
@@ -96,4 +97,4 @@ pickNode = random.choice
 pickNeighbor = random.choice
 
 
-print asciiGrid(randomGrid(10,5),10,5)
+print asciiGrid(randomGrid(4,3),4,3)
