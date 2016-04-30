@@ -1,7 +1,7 @@
 import gridMaker
 from gridMaker import *
 
-grid = gridMaker.randomGrid(10,10)
+grid = randomGrid(10,10)
 
 class Maze(object):
     def __init__(self, grid, n, m):
@@ -20,7 +20,7 @@ class Maze(object):
                 dir_itr = 0
                 for direction in cell: #For every possible wall location
                     if direction != True: #If there is not a wall
-                        new_move=gridMaker.go(move, dir_itr)
+                        new_move=go(move, dir_itr)
                         if new_move not in moves:
                             moves.append(new_move) #Append the adjacent cell 
                             if new_move == self.minotaur_pos: #If the new move reaches the minotaur, stop
