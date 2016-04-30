@@ -1,15 +1,22 @@
 import gridMaker
 from gridMaker import *
+import random
 
-grid = gridMaker.randomGrid(10,10)
+grid = gridMaker.randomGrid(10, 5)
 
 class Maze(object):
-    def __init__(self, grid, n, m):
+    def __init__(self, grid):
         self.grid=grid
-        self.player_pos = (0,0)
-        self.minotaur_pos = (9,9)
-        self.n = n
-        self.m = m
+        self.n=0
+        self.m=0
+        for (i,j) in grid.keys():
+            if i>self.n: self.n = i
+            if j>self.m: self.m = j
+        self.player_pos = (random.randrange(self.n), random.randrange(self.m))
+        self.minotaur_pos = (random.randrange(self.n), random.randrange(self.m))
+        self.star_pos = ((random.randrange(self.n), random.randrange(self.m)))
+    def won(self): return self.player_pos == self.star_pos
+    def lost(self): return self.player_pos == self.minotaur_pos
     def move_minotaur(self):
         moves=[(self.player_pos)]
         path_found = False
@@ -53,6 +60,8 @@ class Maze(object):
                         rep += 'MM'
                     elif (i,j) == self.player_pos:
                         rep += 'pp'
+                    elif (i,j) == self.star_pos:
+                        rep += '**'
                     else:
                         rep += '  '
                     if self.grid[(i,j)][right]:
@@ -68,7 +77,7 @@ class Maze(object):
             rep += '\n'
         return rep
 
-m=Maze(grid, 10, 10)
+m=Maze(grid)
 while m.player_pos != m.minotaur_pos:
     m.move_minotaur()
     print m
