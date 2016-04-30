@@ -47,26 +47,27 @@ def asciiGrid(g,n,m):
     for j in xrange(m):
         for i in xrange(n):
             if g[(i,j)][up]:
-                c += '.|.'
+                c += '+--+'
             else:
-                c += '...'
+                c += '+  +'
         c += '\n'
+        for _ in xrange(2):
+            for i in xrange(n):
+                if g[(i,j)][left]:
+                    c += '|'
+                else:
+                    c += ' '
+                c += '  '
+                if g[(i,j)][right]:
+                    c += '|'
+                else:
+                    c += ' '
+            c += '\n'
         for i in xrange(n):
-            if g[(i,j)][left]:
-                c += '—'
+            if g[(i,j)][down]:
+                c += '+--+'
             else:
-                c += '.'
-            c += '@'
-            if g[(i,j)][right]:
-                c += '—'
-            else:
-                c += '.'
-        c += '\n'
-        for i in xrange(n):
-            if g[(i,j)][up]:
-                c += '.|.'
-            else:
-                c += '...'
+                c += '+  +'
         c += '\n'
     return c
 
@@ -94,6 +95,3 @@ def randomGrid(n,m):
 
 pickNode = random.choice
 pickNeighbor = random.choice
-
-
-print asciiGrid(randomGrid(10,5),10,5)
