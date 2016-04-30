@@ -4,6 +4,7 @@ import random
 
 grid = gridMaker.randomGrid(10, 5)
 
+
 class Maze(object):
     def __init__(self, grid):
         self.grid=grid
@@ -27,7 +28,7 @@ class Maze(object):
                 dir_itr = 0
                 for direction in cell: #For every possible wall location
                     if direction != True: #If there is not a wall
-                        new_move=gridMaker.go(move, dir_itr)
+                        new_move=go(move, dir_itr)
                         if new_move not in moves:
                             moves.append(new_move) #Append the adjacent cell 
                             if new_move == self.minotaur_pos: #If the new move reaches the minotaur, stop
@@ -39,6 +40,14 @@ class Maze(object):
                         break
                 if path_found == True:
                     break
+
+    def move_player(self, d):
+        start = self.grid[self.player_pos]
+        if start[d] == True: #If there's a wall
+            print "There's a wall there!"
+            self.move_player(int(raw_input("Direction: ")))
+        else:
+            self.player_pos = go(self.player_pos, d)
 
 
     def __repr__(self):
@@ -79,6 +88,7 @@ class Maze(object):
 
 m=Maze(grid)
 while m.player_pos != m.minotaur_pos:
+    m.move_player(int(raw_input("Direction: ")))
     m.move_minotaur()
     print m
 
