@@ -33,6 +33,14 @@ class Maze(object):
                 if path_found == True:
                     break
 
+    def move_player(self, d):
+        start = self.grid[self.player_pos]
+        if start[d] == True: #If there's a wall
+            print "There's a wall there!"
+            self.move_player(int(raw_input("Direction: ")))
+        else:
+            self.player_pos = go(self.player_pos, d)
+
 
     def __repr__(self):
         rep = ""
@@ -70,6 +78,7 @@ class Maze(object):
 
 m=Maze(grid, 10, 10)
 while m.player_pos != m.minotaur_pos:
+    m.move_player(int(raw_input("Direction: ")))
     m.move_minotaur()
     print m
 
