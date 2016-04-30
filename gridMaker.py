@@ -41,8 +41,8 @@ def newFullGrid(n,m):
 
 def asciiGrid(g,n,m):
     c = ""
-    for i in xrange(n):
-        for j in xrange(m):
+    for i in xrange(m):
+        for j in xrange(n):
             if g[(i,j)][down]:
                 c += '_'
             else:
@@ -58,20 +58,24 @@ def randomGrid(n,m):
     #From http://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm
     g = newFullGrid(n,m)
     c = [random.choice(g.keys())]
+    visited = c[:]
     while c:
         node = pickNode(c)
+        print asciiGrid(g,n,m,node)
         neighbors = []
         for d in dirs:
-            neighbor = g.get(go(node,d), node)
-            if neighbor not in c:
+            neighbor = go(node,d)
+            if neighbor not in visited and neighbor in g:
                 neighbors.append((d,neighbor))
-        c.remove(node)
         if not neighbors:
+            c.remove(node)
             continue
         (d,neighbor) = pickNeighbor(neighbors)
         g[node][d] = False
         g[neighbor][neg(d)] = False
         c.append(neighbor)
+        visited.append(neighbor)
+    return g
 
 pickNode = random.choice
 pickNeighbor = random.choice
