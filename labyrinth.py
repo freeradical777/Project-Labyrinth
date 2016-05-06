@@ -102,3 +102,8 @@ while not m.won() and not m.lost():
         print e
         continue
     m.move_minotaur()
+
+if m.won():
+    print "You won!"
+else:
+    print "You lost!"
